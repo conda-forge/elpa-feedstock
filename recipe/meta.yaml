@@ -1,6 +1,6 @@
 {% set name = "elpa" %}
 {% set version = "2021.05.002" %}
-{% set build = 0 %}
+{% set build = 1 %}
 {% set mpi = mpi or "nompi" %}
 
 # ELPA uses suffixes to allow parallel installation of several versions in the same prefix
@@ -19,6 +19,7 @@ source:
   sha256: 6fd39006c38a8ffe35069ebe447819187e2cd3625521109a88512d7cd739985f
   patches:
     - fdep-perl.patch
+    - pkgconf.patch
 
 {% if mpi == "nompi" %}
 {% set build = build + 100 %}
