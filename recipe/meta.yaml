@@ -19,14 +19,14 @@ source:
   sha256: 6fd39006c38a8ffe35069ebe447819187e2cd3625521109a88512d7cd739985f
   patches:
     - fdep-perl.patch
-    - pkgconf.patch
+    - check_thread_affinity.patch
 
 {% if mpi == "nompi" %}
 {% set build = build + 100 %}
 {% endif %}
 build:
   number: {{ build }}
-  skip: true  # [win or osx]
+  skip: true  # [win]
 
   {% if mpi != "nompi" %}
   {% set mpi_prefix = "mpi_" + mpi %}
@@ -48,6 +48,7 @@ requirements:
     - autoconf
     - make
     - perl
+    - pcpp  # [osx]
   host:
     - {{ mpi }}  # [mpi != "nompi"]
     - scalapack  # [mpi != "nompi"]
