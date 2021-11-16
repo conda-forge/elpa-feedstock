@@ -21,17 +21,23 @@ if [ "${mpi}" == "openmpi" ]; then
   export OMPI_MCA_rmaps_base_oversubscribe=yes
 fi
 
-# Use full optimization
-export CFLAGS="-mavx2 -mfma ${CFLAGS}"
-export FFLAGS="-mavx2 -mfma ${FFLAGS}"
-
 # fdep program uses FORTRAN_CPP ?= cpp -P -traditional -Wall -Werror
-export FORTRAN_CPP="${CPP} -P -traditional"
+if [[ "$(uname)" = Darwin ]]; then
+  export CFLAGS="-mavx ${CFLAGS}"
+  export FFLAGS="-mavx ${FFLAGS}"
+  export FORTRAN_CPP="${FC:-gfortran} -E -P -cpp"
+  conf_extra="--disable-sse-assembly --disable-avx2"
+else
+  export CFLAGS="-mavx2 -mfma ${CFLAGS}"
+  export FFLAGS="-mavx2 -mfma ${FFLAGS}"
+  export FORTRAN_CPP="${CPP:-cpp} -P -traditional"
+fi
 
 conf_options=(
    "--prefix=${PREFIX}"
    "--with-mpi=${MPI}"
    "--disable-avx512"
+   ${conf_extra:-}
 )
 
 # First build without OpenMP
@@ -41,7 +47,7 @@ pushd build
 
 make -j ${CPU_COUNT:-1}
 for t in ${tests[@]}; do
-  make $t && timeout 30 ./$t
+  make $t && ./$t
 done
 make install
 
