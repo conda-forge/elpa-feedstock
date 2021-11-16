@@ -1,6 +1,6 @@
 {% set name = "elpa" %}
 {% set version = "2021.05.002" %}
-{% set build = 1 %}
+{% set build = 2 %}
 {% set mpi = mpi or "nompi" %}
 
 # ELPA uses suffixes to allow parallel installation of several versions in the same prefix
@@ -15,10 +15,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://elpa.mpcdf.mpg.de/software/tarball-archive/Releases/{{ version }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 6fd39006c38a8ffe35069ebe447819187e2cd3625521109a88512d7cd739985f
+  url: https://elpa.mpcdf.mpg.de/software/tarball-archive/Releases/{{ version }}_bugfix/{{ name }}-{{ version }}_bugfix.tar.gz
+  sha256: deabc48de5b9e4b2f073d749d335c8f354a7ce4245b643a23b7951cd6c90224b
   patches:
     - fdep-perl.patch
+    - pkgconf.patch
     - check_thread_affinity.patch
 
 {% if mpi == "nompi" %}
