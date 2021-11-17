@@ -28,8 +28,12 @@ if [[ "$(uname)" = Darwin ]]; then
   export FORTRAN_CPP="${FC:-gfortran} -E -P -cpp"
   conf_extra="--disable-sse-assembly --disable-avx2"
 else
-  export CFLAGS="-mavx2 -mfma ${CFLAGS}"
-  export FFLAGS="-mavx2 -mfma ${FFLAGS}"
+  if [[ "$(uname -m)" = "x86_64" ]]; then
+    export CFLAGS="-mavx2 -mfma ${CFLAGS}"
+    export FFLAGS="-mavx2 -mfma ${FFLAGS}"
+  else
+    conf_extra="--disable-sse-assembly --disable-avx2 --disable-avx --disable-sse"
+  fi
   export FORTRAN_CPP="${CPP:-cpp} -P -traditional"
 fi
 
