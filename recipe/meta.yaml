@@ -49,19 +49,16 @@ requirements:
     - autoconf
     - make
     - perl
-    - pcpp  # [osx]
+    - llvm-openmp  # [osx]
+    - libgomp  # [linux]
   host:
     - {{ mpi }}  # [mpi != "nompi"]
     - scalapack  # [mpi != "nompi"]
     - libblas
     - liblapack
-    - llvm-openmp  # [osx]
-    - libgomp  # [linux]
   run:
     - {{ mpi }}  # [mpi != "nompi"]
     - scalapack  # [mpi != "nompi"]
-    - libblas
-    - liblapack
 
 test:
   requires:
