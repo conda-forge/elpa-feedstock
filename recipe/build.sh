@@ -55,9 +55,6 @@ for t in ${tests[@]}; do
 done
 make install
 
-# Create a pkg-config file without version suffix as well
-cp ${PREFIX}/lib/pkgconfig/elpa${SUFFIX}{-*,}.pc
-
 popd
 
 # Second build with OpenMP
@@ -67,11 +64,8 @@ pushd build_openmp
 
 make -j ${CPU_COUNT:-1}
 for t in ${tests[@]}; do
-  make $t && timeout 30 ./$t
+  make $t && ./$t
 done
 make install
-
-# Create a pkg-config file without version suffix as well
-cp ${PREFIX}/lib/pkgconfig/elpa${SUFFIX}_openmp{-*,}.pc
 
 popd

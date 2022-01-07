@@ -1,6 +1,6 @@
 {% set name = "elpa" %}
-{% set version = "2021.05.002" %}
-{% set build = 2 %}
+{% set version = "2021.11.001" %}
+{% set build = 0 %}
 {% set mpi = mpi or "nompi" %}
 
 # ELPA uses suffixes to allow parallel installation of several versions in the same prefix
@@ -15,8 +15,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://elpa.mpcdf.mpg.de/software/tarball-archive/Releases/{{ version }}_bugfix/{{ name }}-{{ version }}_bugfix.tar.gz
-  sha256: deabc48de5b9e4b2f073d749d335c8f354a7ce4245b643a23b7951cd6c90224b
+  url: https://elpa.mpcdf.mpg.de/software/tarball-archive/Releases/{{ version }}/{{ name }}-{{ version }}.tar.gz
+  sha256: fb361da6c59946661b73e51538d419028f763d7cb9dacf9d8cd5c9cd3fb7802f
   patches:
     - fdep-perl.patch
     - pkgconf.patch
@@ -73,7 +73,7 @@ test:
 
 about:
   home: https://elpa.mpcdf.mpg.de/
-  doc_url: https://elpa.mpcdf.mpg.de/html/Documentation/ELPA-{{ version }}/html/
+  doc_url: https://elpa.mpcdf.mpg.de/documentation/doxygen/ELPA_DOXYGEN_PAGES/ELPA-{{ version }}/html/index.html
   dev_url: https://gitlab.mpcdf.mpg.de/elpa/elpa
   license: LGPL-3.0-only
   license_file:
