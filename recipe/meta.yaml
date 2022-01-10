@@ -1,6 +1,6 @@
 {% set name = "elpa" %}
 {% set version = "2021.11.001" %}
-{% set build = 1 %}
+{% set build = 2 %}
 {% set mpi = mpi or "nompi" %}
 
 # ELPA uses suffixes to allow parallel installation of several versions in the same prefix
@@ -21,6 +21,7 @@ source:
     - fdep-perl.patch
     - pkgconf.patch
     - check_thread_affinity.patch
+    - includedir-suffix.patch
 
 {% if mpi == "nompi" %}
 {% set build = build + 100 %}
@@ -36,17 +37,17 @@ build:
   {% endif %}
   string: {{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}
 
-  {% if mpi != "nompi" %}
   run_exports:
+  {% if mpi != "nompi" %}
     - {{ name }} * {{ mpi_prefix }}_*
   {% endif %}
+    - {{ pin_subpackage('elpa', max_pin='x.x.x') }}
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
-    - autoconf
     - make
     - perl
     - llvm-openmp  # [osx]

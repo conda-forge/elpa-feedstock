@@ -1,0 +1,26 @@
+diff --git a/Makefile.am b/Makefile.am
+index c6549ec..6ced5d5 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -591,7 +591,7 @@ include generated_headers.am
+ BUILT_SOURCES = $(generated_headers)
+ 
+ # install public headers and Fortran modules files in the include/ dir
+-elpa_includedir = $(includedir)/elpa@SUFFIX@-@PACKAGE_VERSION@
++elpa_includedir = $(includedir)/elpa@SUFFIX@
+ nobase_elpa_include_HEADERS = \
+   $(wildcard modules/*) \
+   src/helpers/lapack_interfaces.h \
+diff --git a/Makefile.in b/Makefile.in
+index 754b340..1f6e0d0 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -14212,7 +14212,7 @@ generated_headers = config-f90.h elpa/elpa_generated.h \
+ BUILT_SOURCES = $(generated_headers)
+ 
+ # install public headers and Fortran modules files in the include/ dir
+-elpa_includedir = $(includedir)/elpa@SUFFIX@-@PACKAGE_VERSION@
++elpa_includedir = $(includedir)/elpa@SUFFIX@
+ nobase_elpa_include_HEADERS = \
+   $(wildcard modules/*) \
+   src/helpers/lapack_interfaces.h \
