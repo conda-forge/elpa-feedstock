@@ -53,6 +53,7 @@ requirements:
     - perl
     - llvm-openmp  # [osx]
     - libgomp  # [linux]
+    - {{ mpi }}  # [build_platform != target_platform and mpi == "openmpi"]
   host:
     - {{ mpi }}  # [mpi != "nompi"]
     - scalapack  # [mpi != "nompi"]
