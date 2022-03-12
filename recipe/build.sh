@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* .
 set -ex
 
 # Selected number of tests that can run on a CI machine
@@ -9,7 +11,10 @@ tests=(
 if [ "${mpi}" != "nompi" ]; then
   MPI=yes
   SUFFIX=""
-  export CXX="$PREFIX/bin/mpicxx" CC="$PREFIX/bin/mpicc" FC="$PREFIX/bin/mpifort"
+  export CXX=mpicxx
+  export CC=mpicc
+  export FC=mpifort
+  export OPAL_PREFIX="$PREFIX"
 else
   MPI=no
   SUFFIX="_onenode"
@@ -47,7 +52,7 @@ conf_options=(
 # First build without OpenMP
 mkdir build
 pushd build
-../configure "${conf_options[@]}"
+../configure "${conf_options[@]}" || (cat config.log && false)
 
 make -j ${CPU_COUNT:-1}
 for t in ${tests[@]}; do
@@ -60,7 +65,7 @@ popd
 # Second build with OpenMP
 mkdir build_openmp
 pushd build_openmp
-../configure --enable-openmp "${conf_options[@]}"
+../configure --enable-openmp "${conf_options[@]}" || (cat config.log && false)
 
 make -j ${CPU_COUNT:-1}
 for t in ${tests[@]}; do
