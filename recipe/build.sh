@@ -11,7 +11,10 @@ tests=(
 if [ "${mpi}" != "nompi" ]; then
   MPI=yes
   SUFFIX=""
-  export CXX="$PREFIX/bin/mpicxx" CC="$PREFIX/bin/mpicc" FC="$PREFIX/bin/mpifort"
+  export CXX=mpicxx
+  export CC=mpicc
+  export FC=mpifort
+  export OPAL_PREFIX="$PREFIX"
 else
   MPI=no
   SUFFIX="_onenode"
