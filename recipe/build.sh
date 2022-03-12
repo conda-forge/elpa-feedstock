@@ -52,7 +52,7 @@ conf_options=(
 # First build without OpenMP
 mkdir build
 pushd build
-../configure "${conf_options[@]}"
+../configure "${conf_options[@]}" || (cat config.log && false)
 
 make -j ${CPU_COUNT:-1}
 for t in ${tests[@]}; do
@@ -65,7 +65,7 @@ popd
 # Second build with OpenMP
 mkdir build_openmp
 pushd build_openmp
-../configure --enable-openmp "${conf_options[@]}"
+../configure --enable-openmp "${conf_options[@]}" || (cat config.log && false)
 
 make -j ${CPU_COUNT:-1}
 for t in ${tests[@]}; do
