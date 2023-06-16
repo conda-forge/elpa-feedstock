@@ -1,6 +1,6 @@
 {% set name = "elpa" %}
 {% set version = "2021.11.001" %}
-{% set build = 3 %}
+{% set build = 4 %}
 {% set mpi = mpi or "nompi" %}
 
 # ELPA uses suffixes to allow parallel installation of several versions in the same prefix
@@ -48,6 +48,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
+    - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
     - make
     - perl
     - llvm-openmp  # [osx]
@@ -55,11 +56,13 @@ requirements:
   host:
     - {{ mpi }}  # [mpi != "nompi"]
     - scalapack  # [mpi != "nompi"]
+    - libtool  # [cuda_compiler_version != "None"]
     - libblas
     - liblapack
   run:
     - {{ mpi }}  # [mpi != "nompi"]
     - scalapack  # [mpi != "nompi"]
+    - __cuda  # [cuda_compiler_version != "None"]
 
 test:
   requires:
