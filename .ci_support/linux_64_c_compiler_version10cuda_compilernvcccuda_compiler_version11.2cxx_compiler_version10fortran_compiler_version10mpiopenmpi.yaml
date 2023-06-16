@@ -1,7 +1,7 @@
 c_compiler:
 - gcc
 c_compiler_version:
-- '12'
+- '10'
 cdt_name:
 - cos7
 channel_sources:
@@ -9,25 +9,25 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cuda_compiler:
-- None
+- nvcc
 cuda_compiler_version:
-- None
+- '11.2'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '12'
+- '10'
 docker_image:
-- quay.io/condaforge/linux-anvil-ppc64le
+- quay.io/condaforge/linux-anvil-cuda:11.2
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
-- '12'
+- '10'
 libblas:
 - 3.9 *netlib
 liblapack:
 - 3.9 *netlib
 mpi:
-- nompi
+- openmpi
 mpich:
 - '4'
 openmpi:
@@ -35,7 +35,7 @@ openmpi:
 perl:
 - 5.32.1
 target_platform:
-- linux-ppc64le
+- linux-64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
