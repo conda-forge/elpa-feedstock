@@ -42,6 +42,8 @@ if [[ ${cuda_compiler_version} != "None" ]]; then
       "--prefix=${PREFIX}"
       "--with-mpi=${MPI}"
       "--disable-avx512"
+      "--enable-nvidia-gpu"
+      "--enable-gpu-streams=nvidia"
       ${conf_extra:-}
    )
 else
@@ -49,8 +51,6 @@ else
       "--prefix=${PREFIX}"
       "--with-mpi=${MPI}"
       "--disable-avx512"
-      "--enable-nvidia-gpu"
-      "--enable-gpu-streams=nvidia"
       ${conf_extra:-}
    )
 fi
