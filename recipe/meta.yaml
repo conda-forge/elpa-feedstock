@@ -56,6 +56,7 @@ requirements:
   host:
     - {{ mpi }}  # [mpi != "nompi"]
     - scalapack  # [mpi != "nompi"]
+    - libtool  # [cuda_compiler_version != "None"]
     - libblas
     - liblapack
   run:
