@@ -37,12 +37,23 @@ else
   export FORTRAN_CPP="${CPP:-cpp} -P -traditional"
 fi
 
-conf_options=(
-   "--prefix=${PREFIX}"
-   "--with-mpi=${MPI}"
-   "--disable-avx512"
-   ${conf_extra:-}
-)
+if [[ ${cuda_compiler_version} != "None" ]]; then
+   conf_options=(
+      "--prefix=${PREFIX}"
+      "--with-mpi=${MPI}"
+      "--disable-avx512"
+      ${conf_extra:-}
+   )
+else:
+   conf_options=(
+      "--prefix=${PREFIX}"
+      "--with-mpi=${MPI}"
+      "--disable-avx512"
+      "--enable-nvidia-gpu"
+      "--enable-gpu-streams=nvidia"
+      ${conf_extra:-}
+   )
+fi
 
 # First build without OpenMP
 mkdir build
