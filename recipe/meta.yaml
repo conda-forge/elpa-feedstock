@@ -48,7 +48,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
-    - {{ compiler('cuda') }} 
+    - {{ compiler('cuda') }}  # [cuda_compiler_version != "None"]
     - make
     - perl
     - llvm-openmp  # [osx]
