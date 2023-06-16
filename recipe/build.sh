@@ -44,7 +44,7 @@ if [[ ${cuda_compiler_version} != "None" ]]; then
       "--disable-avx512"
       ${conf_extra:-}
    )
-else:
+else
    conf_options=(
       "--prefix=${PREFIX}"
       "--with-mpi=${MPI}"
