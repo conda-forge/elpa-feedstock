@@ -11,7 +11,7 @@ Summary: Eigenvalue Solvers for Petaflop-Applications
 
 Development: https://gitlab.mpcdf.mpg.de/elpa/elpa
 
-Documentation: https://elpa.mpcdf.mpg.de/documentation/doxygen/ELPA_DOXYGEN_PAGES/ELPA-2021.11.001/html/index.html
+Documentation: https://elpa.mpcdf.mpg.de/documentation/doxygen/ELPA_DOXYGEN_PAGES/ELPA-2021.11.002/html/index.html
 
 The computation of selected or all eigenvalues and eigenvectors of a symmetric
 (Hermitian) matrix has high relevance for various scientific disciplines.
@@ -258,4 +258,5 @@ Feedstock Maintainers
 =====================
 
 * [@awvwgk](https://github.com/awvwgk/)
+* [@yuzie007](https://github.com/yuzie007/)
 
