@@ -1,6 +1,6 @@
 {% set name = "elpa" %}
 {% set version = "2021.11.002" %}
-{% set build = 1 %}
+{% set build = 2 %}
 {% set mpi = mpi or "nompi" %}
 
 # ELPA uses suffixes to allow parallel installation of several versions in the same prefix
@@ -46,6 +46,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
     - make
