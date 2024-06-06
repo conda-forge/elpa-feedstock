@@ -1,3 +1,5 @@
+azure:
+  timeout_minutes: 30
 conda_forge_output_validation: true
 provider:
   linux_aarch64: default
