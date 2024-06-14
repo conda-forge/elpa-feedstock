@@ -5,7 +5,7 @@
 jobs:
 - job: osx
   pool:
-    vmImage: macOS-11
+    vmImage: macOS-12
   strategy:
     matrix:
       osx_64_mpimpich:
@@ -17,7 +17,8 @@ jobs:
       osx_64_mpiopenmpi:
         CONFIG: osx_64_mpiopenmpi
         UPLOAD_PACKAGES: 'True'
-  timeoutInMinutes: 360
+  timeoutInMinutes: 30
+  variables: {}
 
   steps:
   # TODO: Fast finish on azure pipelines?

@@ -15,11 +15,6 @@ else
   SUFFIX="_onenode"
 fi
 
-if [ "${mpi}" == "openmpi" ]; then
-  export OMPI_MCA_plm=isolated
-  export OMPI_MCA_btl_vader_single_copy_mechanism=none
-  export OMPI_MCA_rmaps_base_oversubscribe=yes
-fi
 
 # fdep program uses FORTRAN_CPP ?= cpp -P -traditional -Wall -Werror
 if [[ "$(uname)" = Darwin ]]; then
