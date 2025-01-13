@@ -1,6 +1,6 @@
 {% set name = "elpa" %}
-{% set version = "2021.11.002" %}
-{% set build = 1 %}
+{% set version = "2024.05.001" %}
+{% set build = 0 %}
 {% set mpi = mpi or "nompi" %}
 
 # ELPA uses suffixes to allow parallel installation of several versions in the same prefix
@@ -94,3 +94,4 @@ extra:
   recipe-maintainers:
     - awvwgk
     - yuzie007
+    - gdonval
