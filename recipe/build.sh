@@ -9,10 +9,11 @@ tests=(
 if [ "${mpi}" != "nompi" ]; then
   MPI=yes
   SUFFIX=""
-  export CXX="$PREFIX/bin/mpicxx" CC="$PREFIX/bin/mpicc" FC="$PREFIX/bin/mpifort"
+  export CXX="${BUILD_PREFIX}/bin/mpicxx" CC="${BUILD_PREFIX}/bin/mpicc" FC="${BUILD_PREFIX}/bin/mpifort"
 else
   MPI=no
   SUFFIX="_onenode"
+  export CXX="${BUILD_PREFIX}/bin/g++" CC="${BUILD_PREFIX}/bin/gcc" FC="${BUILD_PREFIX}/bin/gfortran"
 fi
 
 if [ "${mpi}" == "openmpi" ]; then
