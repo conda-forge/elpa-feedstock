@@ -11,27 +11,16 @@ Summary: Eigenvalue Solvers for Petaflop-Applications
 
 Development: https://gitlab.mpcdf.mpg.de/elpa/elpa
 
-Documentation: https://elpa.mpcdf.mpg.de/documentation/doxygen/ELPA_DOXYGEN_PAGES/ELPA-2021.11.002/html/index.html
+Documentation: https://elpa.mpcdf.mpg.de/documentation/doxygen/ELPA_DOXYGEN_PAGES/ELPA-2024.05.001/html/index.html
 
-The computation of selected or all eigenvalues and eigenvectors of a symmetric
-(Hermitian) matrix has high relevance for various scientific disciplines.
-For the calculation of a significant part of the eigensystem typically direct
-eigensolvers are used. For large problems, the eigensystem calculations with
-existing solvers can become the computational bottleneck.
-
+ELPA provides distributed-memory dense-matrix symmetric eigen-solvers
+optimized for modern many-core CPUs and accelerators.
 
 Current build status
 ====================
 
 
-<table><tr>
-    <td>Travis</td>
-    <td>
-      <a href="https://app.travis-ci.com/conda-forge/elpa-feedstock">
-        <img alt="linux" src="https://img.shields.io/travis/com/conda-forge/elpa-feedstock/main.svg?label=Linux">
-      </a>
-    </td>
-  </tr>
+<table>
     
   <tr>
     <td>Azure</td>
@@ -258,5 +247,6 @@ Feedstock Maintainers
 =====================
 
 * [@awvwgk](https://github.com/awvwgk/)
+* [@unkcpz](https://github.com/unkcpz/)
 * [@yuzie007](https://github.com/yuzie007/)
 
