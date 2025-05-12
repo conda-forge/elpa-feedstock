@@ -27,6 +27,7 @@ requirements:
     - ${{ compiler("c") }}
     - ${{ compiler("cxx") }}
     - ${{ compiler("fortran") }}
+    - libtool
     - autoconf
     - automake
     - m4
@@ -42,6 +43,10 @@ requirements:
       then: ${{ mpi }}
     - if: mpi != "nompi"
       then: scalapack
+    - autoconf >=2.72,<2.73
+    - automake >=1.16
+    - libtool
+    - m4 >=1.4.18
     - libblas
     - liblapack
 

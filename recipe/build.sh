@@ -46,6 +46,9 @@ conf_options=(
    ${conf_extra:-}
 )
 
+export PATH="${BUILD_PREFIX}/bin:${PATH}"
+export M4="${BUILD_PREFIX}/bin/m4"
+
 ./autogen.sh
 
 # First build without OpenMP
