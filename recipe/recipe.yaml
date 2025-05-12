@@ -1,0 +1,87 @@
+schema_version: 1
+
+context:
+  name: elpa
+  version: "2024.05.001"
+  version_underscore: ${{ version | replace('.', '_') }}
+  build_base: 1
+  elpa_suffix: ${{ "_onenode" if mpi == "nompi" else "" }}
+  mpi_prefix: ${{ "nompi" if mpi == "nompi" else "mpi_" + mpi }}
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://gitlab.mpcdf.mpg.de/elpa/elpa/-/archive/release_${{ version_underscore }}/elpa-release_${{ version_underscore }}.tar.gz
+  sha256: 5e0c685536869bb91c230d70cac5e779ff418575681836f240b3e64e10b23f3e
+
+build:
+  number: 0
+  skip:
+    - win
+  script: build.sh
+
+requirements:
+  build:
+    - ${{ compiler("c") }}
+    - ${{ compiler("cxx") }}
+    - ${{ compiler("fortran") }}
+    - make
+    - perl
+    - if: osx
+      then: [ llvm-openmp ]
+    - if: linux
+      then: [ libgomp ]
+
+  host:
+    - if: mpi != "nompi"
+      then: ${{ mpi }}
+    - if: mpi != "nompi"
+      then: scalapack
+    - libblas
+    - liblapack
+
+  run:
+    - if: mpi != "nompi"
+      then: ${{ mpi }}
+    - if: mpi != "nompi"
+      then: scalapack
+
+  run_exports:
+    - ${{ pin_subpackage("elpa", upper_bound="x.x.x") }}
+    - if: mpi != "nompi"
+      then: ${{ name }} * ${{ mpi_prefix }}_*
+
+tests:
+  - script:
+      - test -f $PREFIX/lib/libelpa${{ elpa_suffix }}${SHLIB_EXT}
+      - test -f $PREFIX/lib/libelpa${{ elpa_suffix }}_openmp${SHLIB_EXT}
+      - pkg-config ${{ name }}${{ elpa_suffix }} --exact-version ${{ version }}
+      - pkg-config ${{ name }}${{ elpa_suffix }}_openmp --exact-version ${{ version }}
+      - elpa2_print_kernels${{ elpa_suffix }}
+      - elpa2_print_kernels${{ elpa_suffix }}_openmp
+    requirements:
+      run: 
+        - pkg-config
+
+about:
+  homepage: https://elpa.mpcdf.mpg.de/
+  documentation: https://elpa.mpcdf.mpg.de/documentation/doxygen/ELPA_DOXYGEN_PAGES/ELPA-${{ version }}/html/index.html
+  repository: https://gitlab.mpcdf.mpg.de/elpa/elpa
+  license: LGPL-3.0-only
+  license_file:
+    - LICENSE
+    - COPYING/COPYING
+    - COPYING/gpl.txt
+    - COPYING/lgpl.txt
+  summary: Eigenvalue Solvers for Petaflop-Applications
+  description: |
+    ELPA provides distributed-memory dense-matrix symmetric eigen-solvers
+    optimized for modern many-core CPUs and accelerators.
+
+extra:
+  recipe-maintainers:
+    - awvwgk
+    - yuzie007
+    - unkcpz

@@ -44,6 +44,8 @@ conf_options=(
    ${conf_extra:-}
 )
 
+./autogen.sh
+
 # First build without OpenMP
 mkdir build
 pushd build
@@ -63,7 +65,7 @@ pushd build_openmp
 ../configure --enable-openmp "${conf_options[@]}"
 
 make -j ${CPU_COUNT:-1}
-for t in ${tests[@]}; do
+for t in "${tests[@]}"; do
   make $t && ./$t
 done
 make install
