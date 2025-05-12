@@ -27,6 +27,9 @@ requirements:
     - ${{ compiler("c") }}
     - ${{ compiler("cxx") }}
     - ${{ compiler("fortran") }}
+    - autoconf
+    - automake
+    - m4
     - make
     - perl
     - if: osx

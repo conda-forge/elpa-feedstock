@@ -41,6 +41,8 @@ conf_options=(
    "--prefix=${PREFIX}"
    "--with-mpi=${MPI}"
    "--disable-avx512"
+   "--disable-static" 
+   "--enable-shared"
    ${conf_extra:-}
 )
 
