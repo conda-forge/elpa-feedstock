@@ -48,6 +48,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
+    - {{ stdlib("c") }}
     - make
     - perl
     - llvm-openmp  # [osx]
