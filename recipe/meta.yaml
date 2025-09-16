@@ -47,6 +47,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
     - {{ compiler('fortran') }}
     - make
     - perl
