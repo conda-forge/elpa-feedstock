@@ -16,7 +16,7 @@ package:
 
 source:
   url: https://elpa.mpcdf.mpg.de/software/tarball-archive/Releases/{{ version }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 576f1caeed7883b81396640fda0f504183866cf6cbd4bc71d1383ba2208f1f97
+  sha256: feeb1fea1ab4a8670b8d3240765ef0ada828062ef7ec9b735eecba2848515c94
   patches:
     - fdep-perl.patch
     - pkgconf.patch
