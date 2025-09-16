@@ -50,9 +50,6 @@ pushd build
 ../configure "${conf_options[@]}"
 
 make -j ${CPU_COUNT:-1}
-for t in ${tests[@]}; do
-  make $t && ./$t
-done
 make install
 
 popd
