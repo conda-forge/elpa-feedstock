@@ -32,6 +32,7 @@ if [[ "$(uname)" = Darwin ]]; then
     export CFLAGS="-mavx ${CFLAGS}"
     export FFLAGS="-mavx ${FFLAGS}"
   fi
+  export SDKROOT=$(xcrun --show-sdk-path)
   export FORTRAN_CPP="${FC:-gfortran} -E -P -cpp"
   conf_extra="--disable-sse-assembly --disable-avx2 --disable-avx --disable-sse"
 else
