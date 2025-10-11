@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* .
 set -ex
 
 # Selected number of tests that can run on a CI machine
@@ -23,10 +25,15 @@ fi
 
 # fdep program uses FORTRAN_CPP ?= cpp -P -traditional -Wall -Werror
 if [[ "$(uname)" = Darwin ]]; then
-  export CFLAGS="-mavx ${CFLAGS}"
-  export FFLAGS="-mavx ${FFLAGS}"
+  if [[ "${target_platform}" = "osx-arm64" ]]; then
+    export CFLAGS="${CFLAGS}"
+    export FFLAGS="${FFLAGS}"
+  else
+    export CFLAGS="-mavx ${CFLAGS}"
+    export FFLAGS="-mavx ${FFLAGS}"
+  fi
   export FORTRAN_CPP="${FC:-gfortran} -E -P -cpp"
-  conf_extra="--disable-sse-assembly --disable-avx2"
+  conf_extra="--disable-sse-assembly --disable-avx2 --disable-avx --disable-sse"
 else
   if [[ "$(uname -m)" = "x86_64" ]]; then
     export CFLAGS="-mavx2 -mfma ${CFLAGS}"
