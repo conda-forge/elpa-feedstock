@@ -50,6 +50,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
     - {{ stdlib("c") }}
+    - {{ mpi }}  # [mpi != "nompi"]
     - make
     - perl
     - llvm-openmp  # [osx]
