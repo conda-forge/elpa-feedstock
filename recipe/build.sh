@@ -29,12 +29,13 @@ if [[ "$(uname)" = Darwin ]]; then
     export CFLAGS="${CFLAGS} -fno-lto"
     export FCFLAGS="${FCFLAGS} -fno-lto"
     export CXXFLAGS="${CXXFLAGS} -fno-lto"
+    conf_extra="--disable-sse-assembly --disable-avx2 --disable-avx --disable-sse"
   else
     export CFLAGS="-mavx ${CFLAGS}"
     export FFLAGS="-mavx ${FFLAGS}"
+    conf_extra="--disable-sse-assembly --disable-avx2"
   fi
   export FORTRAN_CPP="${FC:-gfortran} -E -P -cpp"
-  conf_extra="--disable-sse-assembly --disable-avx2"
 else
   if [[ "$(uname -m)" = "x86_64" ]]; then
     export CFLAGS="-mavx2 -mfma ${CFLAGS}"
