@@ -41,6 +41,8 @@ fi
 
 conf_options=(
    "--prefix=${PREFIX}"
+   "--build=${BUILD}"
+   "--host=${HOST}"
    "--with-mpi=${MPI}"
    "--disable-avx512"
    ${conf_extra:-}
