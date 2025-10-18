@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* .
 set -ex
 
 # Selected number of tests that can run on a CI machine
@@ -9,7 +11,9 @@ tests=(
 if [ "${mpi}" != "nompi" ]; then
   MPI=yes
   SUFFIX=""
-  export CXX="$PREFIX/bin/mpicxx" CC="$PREFIX/bin/mpicc" FC="$PREFIX/bin/mpifort"
+  export CXX="$BUILD_PREFIX/bin/mpicxx"
+  export CC="$BUILD_PREFIX/bin/mpicc"
+  export FC="$BUILD_PREFIX/bin/mpifort"
 else
   MPI=no
   SUFFIX="_onenode"
@@ -23,10 +27,17 @@ fi
 
 # fdep program uses FORTRAN_CPP ?= cpp -P -traditional -Wall -Werror
 if [[ "$(uname)" = Darwin ]]; then
-  export CFLAGS="-mavx ${CFLAGS}"
-  export FFLAGS="-mavx ${FFLAGS}"
+  if [[ "${target_platform}" == osx-arm64 ]]; then
+    export CFLAGS="${CFLAGS} -fno-lto"
+    export FCFLAGS="${FCFLAGS} -fno-lto"
+    export CXXFLAGS="${CXXFLAGS} -fno-lto"
+    conf_extra="--disable-sse-assembly --disable-avx2 --disable-avx --disable-sse"
+  else
+    export CFLAGS="-mavx ${CFLAGS}"
+    export FFLAGS="-mavx ${FFLAGS}"
+    conf_extra="--disable-sse-assembly --disable-avx2"
+  fi
   export FORTRAN_CPP="${FC:-gfortran} -E -P -cpp"
-  conf_extra="--disable-sse-assembly --disable-avx2"
 else
   if [[ "$(uname -m)" = "x86_64" ]]; then
     export CFLAGS="-mavx2 -mfma ${CFLAGS}"
@@ -39,6 +50,8 @@ fi
 
 conf_options=(
    "--prefix=${PREFIX}"
+   "--build=${BUILD}"
+   "--host=${HOST}"
    "--with-mpi=${MPI}"
    "--disable-avx512"
    ${conf_extra:-}
