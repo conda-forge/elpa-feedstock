@@ -51,6 +51,9 @@ requirements:
     - {{ compiler('fortran') }}
     - {{ stdlib("c") }}
     - {{ mpi }}  # [mpi != "nompi"]
+    - scalapack  # [mpi != "nompi"]
+    - libblas
+    - liblapack
     - make
     - perl
     - llvm-openmp  # [osx]
