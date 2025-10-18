@@ -25,8 +25,14 @@ fi
 
 # fdep program uses FORTRAN_CPP ?= cpp -P -traditional -Wall -Werror
 if [[ "$(uname)" = Darwin ]]; then
-  export CFLAGS="-mavx ${CFLAGS}"
-  export FFLAGS="-mavx ${FFLAGS}"
+  if [[ "${target_platform}" == osx-arm64 ]]; then
+    export CFLAGS="${CFLAGS} -fno-lto"
+    export FCFLAGS="${FCFLAGS} -fno-lto"
+    export CXXFLAGS="${CXXFLAGS} -fno-lto"
+  else
+    export CFLAGS="-mavx ${CFLAGS}"
+    export FFLAGS="-mavx ${FFLAGS}"
+  fi
   export FORTRAN_CPP="${FC:-gfortran} -E -P -cpp"
   conf_extra="--disable-sse-assembly --disable-avx2"
 else
