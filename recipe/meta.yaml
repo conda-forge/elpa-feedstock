@@ -45,10 +45,15 @@ build:
 
 requirements:
   build:
+    - gnuconfig  # [unix]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
     - {{ stdlib("c") }}
+    - {{ mpi }}  # [mpi != "nompi"]
+    - scalapack  # [mpi != "nompi"]
+    - libblas
+    - liblapack
     - make
     - perl
     - llvm-openmp  # [osx]
