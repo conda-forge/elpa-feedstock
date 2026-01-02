@@ -25,6 +25,9 @@ if [ "${mpi}" == "openmpi" ]; then
   export OMPI_MCA_rmaps_base_oversubscribe=yes
 fi
 
+# Default: no GPU support
+export ENABLE_CUDA="no"
+
 # fdep program uses FORTRAN_CPP ?= cpp -P -traditional -Wall -Werror
 if [[ "$(uname)" = Darwin ]]; then
   if [[ "${target_platform}" == osx-arm64 ]]; then
@@ -48,7 +51,8 @@ else
   export FORTRAN_CPP="${CPP:-cpp} -P -traditional"
 fi
 
-conf_options=(
+# Base options used by both builds
+base_options=(
    "--prefix=${PREFIX}"
    "--build=${BUILD}"
    "--host=${HOST}"
@@ -57,10 +61,26 @@ conf_options=(
    ${conf_extra:-}
 )
 
+# CUDA-specific options (only for mvapich)
+cuda_options=()
+
+if [[ "${mpi}" == "mvapich" ]]; then
+  source ${RECIPE_DIR}/mvapich_cuda_stub.sh
+  cuda_options=(
+    "--enable-nvidia-gpu-kernels=yes"
+    "--with-NVIDIA-GPU-compute-capability=sm_80"
+    "--enable-gpu-streams=no"
+    "--enable-cuda-aware-mpi=yes"
+    "--with-cuda-path=${CUDA_HOME}"
+    "LDFLAGS=-L${PREFIX}/lib -L${CUDA_HOME}/lib -L${CUDA_HOME}/lib/stubs"
+  )
+fi
+
 # First build without OpenMP
 mkdir build
 pushd build
-../configure "${conf_options[@]}"
+
+../configure "${base_options[@]}" "${cuda_options[@]}"
 
 make -j ${CPU_COUNT:-1}
 make install
@@ -70,7 +90,8 @@ popd
 # Second build with OpenMP
 mkdir build_openmp
 pushd build_openmp
-../configure --enable-openmp "${conf_options[@]}"
+
+../configure --enable-openmp "${base_options[@]}" "${cuda_options[@]}"
 
 make -j ${CPU_COUNT:-1}
 for t in ${tests[@]}; do
@@ -79,3 +100,9 @@ done
 make install
 
 popd
+
+if [[ ${mpi} == "mvapich" ]]; then
+  rm -f "${CUDA_HOME}/lib/stubs/libcuda.so.1"
+  rm -f "${CUDA_HOME}/lib/libcublas.so"
+  rm -f "${CUDA_HOME}/lib/libcusolver.so"
+fi

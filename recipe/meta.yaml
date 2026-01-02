@@ -29,6 +29,7 @@ source:
 build:
   number: {{ build }}
   skip: true  # [win]
+  skip: true  # [mpi == 'mvapich' and target_platform != 'linux-64']
 
   {% if mpi != "nompi" %}
   {% set mpi_prefix = "mpi_" + mpi %}
@@ -49,6 +50,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
+    - cuda-nvcc  # [mpi == "mvapich"]
     - {{ stdlib("c") }}
     - {{ mpi }}  # [mpi != "nompi"]
     - scalapack  # [mpi != "nompi"]
@@ -61,9 +63,14 @@ requirements:
   host:
     - {{ mpi }}  # [mpi != "nompi"]
     - scalapack  # [mpi != "nompi"]
+    - libcublas-dev  # [mpi == "mvapich"]
+    - libcusolver-dev  # [mpi == "mvapich"]
     - libblas
     - liblapack
   run:
+    - cuda-nvcc  # [mpi == "mvapich"]
+    - libcublas  # [mpi == "mvapich"]
+    - libcusolver  # [mpi == "mvapich"]
     - {{ mpi }}  # [mpi != "nompi"]
     - scalapack  # [mpi != "nompi"]
 
@@ -75,8 +82,19 @@ test:
     - test -f $PREFIX/lib/libelpa{{ elpa_suffix }}_openmp${SHLIB_EXT}
     - pkg-config {{ name }}{{ elpa_suffix }} --exact-version {{ version }}
     - pkg-config {{ name }}{{ elpa_suffix }}_openmp --exact-version {{ version }}
-    - {{ name }}2_print_kernels{{ elpa_suffix }}
-    - {{ name }}2_print_kernels{{ elpa_suffix }}_openmp
+    - |
+      if [[ "${PKG_BUILD_STRING}" == *mpi_mvapich* ]]; then
+        if [[ "${target_platform}" == "linux-64" ]]; then
+          export CUDA_HOME="${CONDA_PREFIX}/targets/x86_64-linux"
+        else
+          export CUDA_HOME="${CONDA_PREFIX}/targets/sbsa-linux"
+        fi
+        export LD_LIBRARY_PATH="${CUDA_HOME}/lib/stubs:${LD_LIBRARY_PATH}"
+        ln -sf "${CUDA_HOME}/lib/stubs/libcuda.so" "${CUDA_HOME}/lib/stubs/libcuda.so.1"
+        export MPIR_CVAR_ENABLE_GPU=0
+      fi
+      {{ name }}2_print_kernels{{ elpa_suffix }}
+      {{ name }}2_print_kernels{{ elpa_suffix }}_openmp
 
 about:
   home: https://elpa.mpcdf.mpg.de/
@@ -95,9 +113,11 @@ about:
     For the calculation of a significant part of the eigensystem typically direct
     eigensolvers are used. For large problems, the eigensystem calculations with
     existing solvers can become the computational bottleneck.
+    The MVAPIch version comes with CUDA 12 support.
 
 extra:
   recipe-maintainers:
     - jan-janssen
     - awvwgk
     - yuzie007
+    - j34ni
