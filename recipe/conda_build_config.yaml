@@ -17,4 +17,4 @@ fortran_compiler_version:
   - 13
 
 c_stdlib_version:
-  - 2.34
+  - 2.34  # [linux]
