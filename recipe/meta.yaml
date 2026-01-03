@@ -28,7 +28,7 @@ source:
 {% endif %}
 build:
   number: {{ build }}
-  skip: true  # [win]
+  skip: true  # [win and osx]
   skip: true  # [mpi == 'mvapich' and target_platform != 'linux-64']
 
   {% if mpi != "nompi" %}
