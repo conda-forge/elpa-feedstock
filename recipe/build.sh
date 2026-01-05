@@ -62,25 +62,35 @@ base_options=(
 )
 
 # CUDA-specific options (only for mvapich)
-cuda_options=()
+common_cuda_options=()
+gpu_kernel_options=()
 
 if [[ "${mpi}" == "mvapich" ]]; then
   source ${RECIPE_DIR}/mvapich_cuda_stub.sh
-  cuda_options=(
-    "--enable-nvidia-gpu-kernels=yes"
-    "--with-NVIDIA-GPU-compute-capability=sm_80"
-    "--enable-gpu-streams=no"
+
+  common_cuda_options=(
     "--enable-cuda-aware-mpi=yes"
     "--with-cuda-path=${CUDA_HOME}"
     "LDFLAGS=-L${PREFIX}/lib -L${CUDA_HOME}/lib -L${CUDA_HOME}/lib/stubs"
   )
+
+  gpu_kernel_options=(
+    "--enable-nvidia-gpu-kernels=yes"
+    "--enable-gpu-streams=no"
+  )
+
+  if [[ "${target_platform}" == "linux-aarch64" ]]; then
+    gpu_kernel_options+=( "--with-NVIDIA-GPU-compute-capability=sm_90" )
+  else
+    gpu_kernel_options+=( "--with-NVIDIA-GPU-compute-capability=sm_80" )
+  fi
 fi
 
 # First build without OpenMP
 mkdir build
 pushd build
 
-../configure "${base_options[@]}" "${cuda_options[@]}"
+../configure "${base_options[@]}" "${common_cuda_options[@]}"
 
 make -j ${CPU_COUNT:-1}
 make install
@@ -91,7 +101,7 @@ popd
 mkdir build_openmp
 pushd build_openmp
 
-../configure --enable-openmp "${base_options[@]}" "${cuda_options[@]}"
+../configure --enable-openmp "${base_options[@]}" "${common_cuda_options[@]}" "${gpu_kernel_options[@]}"
 
 make -j ${CPU_COUNT:-1}
 for t in ${tests[@]}; do
