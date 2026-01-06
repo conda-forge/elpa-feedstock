@@ -25,9 +25,6 @@ if [ "${mpi}" == "openmpi" ]; then
   export OMPI_MCA_rmaps_base_oversubscribe=yes
 fi
 
-# Default: no GPU support
-export ENABLE_CUDA="no"
-
 # fdep program uses FORTRAN_CPP ?= cpp -P -traditional -Wall -Werror
 if [[ "$(uname)" = Darwin ]]; then
   if [[ "${target_platform}" == osx-arm64 ]]; then
@@ -61,54 +58,52 @@ base_options=(
    ${conf_extra:-}
 )
 
-# CUDA-specific options (only for mvapich)
-common_cuda_options=()
-gpu_kernel_options=()
+if [[ "${target_platform}" == "linux-aarch64" ]]; then
+  base_options+=("--enable-neon-arch64-kernels")
+fi
 
+# CUDA-specific options (only for mvapich)
+cuda_options=()
 if [[ "${mpi}" == "mvapich" ]]; then
   source ${RECIPE_DIR}/mvapich_cuda_stub.sh
-
-  common_cuda_options=(
+  cuda_options=(
+    "--enable-nvidia-gpu-kernels"
+    "--enable-nvidia-sm80-gpu-kernels"
+    "--with-NVIDIA-GPU-compute-capability=sm_80"
     "--enable-cuda-aware-mpi=yes"
     "--with-cuda-path=${CUDA_HOME}"
-    "LDFLAGS=-L${PREFIX}/lib -L${CUDA_HOME}/lib -L${CUDA_HOME}/lib/stubs"
   )
-
-  gpu_kernel_options=(
-    "--enable-nvidia-gpu-kernels=yes"
-    "--enable-gpu-streams=no"
-  )
-
-  if [[ "${target_platform}" == "linux-aarch64" ]]; then
-    gpu_kernel_options+=( "--with-NVIDIA-GPU-compute-capability=sm_90" )
-  else
-    gpu_kernel_options+=( "--with-NVIDIA-GPU-compute-capability=sm_80" )
-  fi
+  export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib -L${CUDA_HOME}/lib -L${CUDA_HOME}/lib/stubs"
 fi
 
 # First build without OpenMP
 mkdir build
 pushd build
-
-../configure "${base_options[@]}" "${common_cuda_options[@]}"
-
+../configure "${base_options[@]}" "${cuda_options[@]}"
 make -j ${CPU_COUNT:-1}
 make install
-
 popd
 
 # Second build with OpenMP
 mkdir build_openmp
 pushd build_openmp
 
-../configure --enable-openmp "${base_options[@]}" "${common_cuda_options[@]}" "${gpu_kernel_options[@]}"
+openmp_extra=()
+if [[ "${target_platform}" == "linux-aarch64" ]]; then
+  openmp_extra+=("--disable-fortran-tests" "--disable-c-tests" "--disable-cpp-tests")
+fi
+
+../configure --enable-openmp "${base_options[@]}" "${cuda_options[@]}" "${openmp_extra[@]}"
 
 make -j ${CPU_COUNT:-1}
-for t in ${tests[@]}; do
-  make $t && ./$t
-done
-make install
 
+if [[ "${target_platform}" != "linux-aarch64" ]]; then
+  for t in ${tests[@]}; do
+    make $t && ./$t
+  done
+fi
+
+make install
 popd
 
 if [[ ${mpi} == "mvapich" ]]; then

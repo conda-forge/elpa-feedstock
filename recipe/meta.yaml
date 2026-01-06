@@ -51,7 +51,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
     - cuda-nvcc  # [mpi == "mvapich"]
-    - {{ stdlib("c") }}
+#   - {{ stdlib("c") }}
     - {{ mpi }}  # [mpi != "nompi"]
     - scalapack  # [mpi != "nompi"]
     - libblas
@@ -72,6 +72,7 @@ requirements:
     - libcublas  # [mpi == "mvapich"]
     - libcusolver  # [mpi == "mvapich"]
     - {{ mpi }}  # [mpi != "nompi"]
+    - mvapich =4.1=shs_cuda_*_1*  # [mpi == "mvapich"]
     - scalapack  # [mpi != "nompi"]
 
 test:
