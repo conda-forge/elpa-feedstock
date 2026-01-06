@@ -51,7 +51,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
     - cuda-nvcc  # [mpi == "mvapich"]
-#   - {{ stdlib("c") }}
+    - {{ stdlib("c") }}
     - {{ mpi }}  # [mpi != "nompi"]
     - scalapack  # [mpi != "nompi"]
     - libblas
