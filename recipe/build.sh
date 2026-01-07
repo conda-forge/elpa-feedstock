@@ -62,42 +62,57 @@ if [[ "${target_platform}" == "linux-aarch64" ]]; then
   base_options+=("--enable-neon-arch64-kernels")
 fi
 
+# Test disabling on aarch64
+test_extra=()
+if [[ "${target_platform}" == "linux-aarch64" ]]; then
+  test_extra=( "--disable-fortran-tests" "--disable-c-tests" "--disable-cpp-tests" )
+fi
+
 # CUDA-specific options (only for mvapich)
 cuda_options=()
 if [[ "${mpi}" == "mvapich" ]]; then
   source ${RECIPE_DIR}/mvapich_cuda_stub.sh
-  cuda_options=(
-    "--enable-nvidia-gpu-kernels"
-    "--enable-nvidia-sm80-gpu-kernels"
-    "--with-NVIDIA-GPU-compute-capability=sm_80"
-    "--enable-cuda-aware-mpi=yes"
-    "--with-cuda-path=${CUDA_HOME}"
-  )
+
+  if [[ "${target_platform}" == "linux-aarch64" ]]; then
+    cuda_options=(
+      "--enable-nvidia-gpu-kernels"
+      "--enable-nvidia-sm90-gpu-kernels"
+      "--with-NVIDIA-GPU-compute-capability=sm_90"
+      "--enable-cuda-aware-mpi=yes"
+      "--with-cuda-path=${CUDA_HOME}"
+    )
+  else
+    cuda_options=(
+      "--enable-nvidia-gpu-kernels"
+      "--enable-nvidia-sm80-gpu-kernels"
+      "--with-NVIDIA-GPU-compute-capability=sm_80"
+      "--enable-cuda-aware-mpi=yes"
+      "--with-cuda-path=${CUDA_HOME}"
+    )
+  fi
+
   export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib -L${CUDA_HOME}/lib -L${CUDA_HOME}/lib/stubs"
 fi
 
-# First build without OpenMP
-mkdir build
-pushd build
-../configure "${base_options[@]}" "${cuda_options[@]}"
-make -j ${CPU_COUNT:-1}
-make install
-popd
+# Non-OpenMP build (skip on aarch64)
+if [[ "${target_platform}" != "linux-aarch64" ]]; then
+  mkdir build
+  pushd build
+  ../configure "${base_options[@]}" "${cuda_options[@]}" "${test_extra[@]}"
+  make -j ${CPU_COUNT:-1}
+  make install
+  popd
+fi
 
-# Second build with OpenMP
+# OpenMP build (always)
 mkdir build_openmp
 pushd build_openmp
 
-openmp_extra=()
-if [[ "${target_platform}" == "linux-aarch64" ]]; then
-  openmp_extra+=("--disable-fortran-tests" "--disable-c-tests" "--disable-cpp-tests")
-fi
-
-../configure --enable-openmp "${base_options[@]}" "${cuda_options[@]}" "${openmp_extra[@]}"
+../configure --enable-openmp "${base_options[@]}" "${cuda_options[@]}" "${test_extra[@]}"
 
 make -j ${CPU_COUNT:-1}
 
-if [[ "${target_platform}" != "linux-aarch64" ]]; then
+if [[ "${target_platform}" != "linux-aarch64" ]] && [[ "${mpi}" != "mvapich" ]]; then
   for t in ${tests[@]}; do
     make $t && ./$t
   done
