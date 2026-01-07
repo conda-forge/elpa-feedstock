@@ -76,7 +76,6 @@ if [[ "${mpi}" == "mvapich" ]]; then
   if [[ "${target_platform}" == "linux-aarch64" ]]; then
     cuda_options=(
       "--enable-nvidia-gpu-kernels"
-      "--enable-nvidia-sm90-gpu-kernels"
       "--with-NVIDIA-GPU-compute-capability=sm_90"
       "--enable-cuda-aware-mpi=yes"
       "--with-cuda-path=${CUDA_HOME}"
@@ -84,7 +83,6 @@ if [[ "${mpi}" == "mvapich" ]]; then
   else
     cuda_options=(
       "--enable-nvidia-gpu-kernels"
-      "--enable-nvidia-sm80-gpu-kernels"
       "--with-NVIDIA-GPU-compute-capability=sm_80"
       "--enable-cuda-aware-mpi=yes"
       "--with-cuda-path=${CUDA_HOME}"
