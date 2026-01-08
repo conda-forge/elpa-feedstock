@@ -16,6 +16,11 @@ jobs:
         CONFIG: win_64_mpinompi
         UPLOAD_PACKAGES: 'True'
         SHORT_CONFIG: win_64_mpinompi
+      win_64_mpiopenmpi:
+        CONFIG: win_64_mpiopenmpi
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: win_64_mpiopenmpi
+    maxParallel: 3
   timeoutInMinutes: 360
   variables:
     CONDA_BLD_PATH: D:\\bld\\

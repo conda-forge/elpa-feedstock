@@ -39,66 +39,311 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_mpimpich</td>
+              <td>linux_64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpimpich</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_mpimpich" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpimpich" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_mpinompi</td>
+              <td>linux_64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpimvapich</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_mpinompi" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpimvapich" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_mpiopenmpi</td>
+              <td>linux_64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpinompi</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_mpiopenmpi" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpinompi" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_mpimpich</td>
+              <td>linux_64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpiopenmpi</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_mpimpich" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpiopenmpi" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_mpinompi</td>
+              <td>linux_64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpimpich</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_mpinompi" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpimpich" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_mpiopenmpi</td>
+              <td>linux_64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpimvapich</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_mpiopenmpi" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpimvapich" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_mpimpich</td>
+              <td>linux_64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpinompi</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_mpimpich" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpinompi" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_mpinompi</td>
+              <td>linux_64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpiopenmpi</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_mpinompi" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpiopenmpi" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_mpiopenmpi</td>
+              <td>linux_64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpimpich</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_mpiopenmpi" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpimpich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpimvapich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpimvapich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpinompi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpinompi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpiopenmpi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpiopenmpi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpimpich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpimpich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpimvapich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpimvapich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpinompi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpinompi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpiopenmpi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpiopenmpi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpimpich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpimpich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpimvapich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpimvapich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpinompi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpinompi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpiopenmpi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpiopenmpi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpimpich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpimpich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpimvapich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpimvapich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpinompi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpinompi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpiopenmpi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpiopenmpi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpimpich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpimpich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpimvapich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpimvapich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpinompi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpinompi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpiopenmpi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpiopenmpi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpimpich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpimpich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpimvapich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpimvapich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpinompi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpinompi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpiopenmpi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpiopenmpi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpimpich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpimpich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpinompi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpinompi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpiopenmpi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version13c_stdlib_version2.17cxx_compiler_version13fortran_compiler_version13mpiopenmpi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpimpich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpimpich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpinompi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpinompi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpiopenmpi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version13c_stdlib_version2.34cxx_compiler_version13fortran_compiler_version13mpiopenmpi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpimpich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpimpich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpinompi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpinompi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpiopenmpi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version14c_stdlib_version2.17cxx_compiler_version14fortran_compiler_version14mpiopenmpi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpimpich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpimpich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpinompi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpinompi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpiopenmpi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version14c_stdlib_version2.34cxx_compiler_version14fortran_compiler_version14mpiopenmpi" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -155,6 +400,13 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=win&configuration=win%20win_64_mpinompi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>win_64_mpiopenmpi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=win&configuration=win%20win_64_mpiopenmpi" alt="variant">
                 </a>
               </td>
             </tr>
