@@ -32,7 +32,6 @@ jobs:
         CONFIG: osx_arm64_mpiopenmpi
         UPLOAD_PACKAGES: 'True'
         SHORT_CONFIG: osx_arm64_mpiopenmpi
-    maxParallel: 6
   timeoutInMinutes: 360
   variables: {}
 
