@@ -64,7 +64,7 @@ fi
 
 # Test disabling on aarch64
 test_extra=()
-if [[ "${target_platform}" == "linux-aarch64" ]]; then
+if [[ "${target_platform}" == "linux-aarch64" ]] && [[ "${mpi}" == "mvapich" ]]; then
   test_extra=( "--disable-fortran-tests" "--disable-c-tests" "--disable-cpp-tests" )
 fi
 
@@ -92,8 +92,8 @@ if [[ "${mpi}" == "mvapich" ]]; then
   export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib -L${CUDA_HOME}/lib -L${CUDA_HOME}/lib/stubs"
 fi
 
-# Non-OpenMP build (skip on aarch64)
-if [[ "${target_platform}" != "linux-aarch64" ]]; then
+# Non-OpenMP build (skip on aarch64 only for mvapich)
+if [[ "${target_platform}" != "linux-aarch64" ]] || [[ "${mpi}" != "mvapich" ]]; then
   mkdir build
   pushd build
   ../configure "${base_options[@]}" "${cuda_options[@]}" "${test_extra[@]}"
@@ -110,7 +110,7 @@ pushd build_openmp
 
 make -j ${CPU_COUNT:-1}
 
-if [[ "${target_platform}" != "linux-aarch64" ]] && [[ "${mpi}" != "mvapich" ]]; then
+if [[ "${target_platform}" != "linux-aarch64" ]] || [[ "${mpi}" != "mvapich" ]]; then
   for t in ${tests[@]}; do
     make $t && ./$t
   done
