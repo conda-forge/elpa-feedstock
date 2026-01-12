@@ -78,11 +78,16 @@ requirements:
 test:
   requires:
     - pkg-config
+  files:
+    - mvapich_stubs.sh  # [mpi == 'mvapich']
   commands:
     - test -f $PREFIX/lib/libelpa{{ elpa_suffix }}${SHLIB_EXT}  # [target_platform != "linux-aarch64"]
     - test -f $PREFIX/lib/libelpa{{ elpa_suffix }}_openmp${SHLIB_EXT}
     - pkg-config {{ name }}{{ elpa_suffix }} --exact-version {{ version }}  # [target_platform != "linux-aarch64"]
     - pkg-config {{ name }}{{ elpa_suffix }}_openmp --exact-version {{ version }}
+    - if [[ "${PKG_BUILD_STRING}" == *mpi_mvapich* ]]; then . ./mvapich_stubs.sh; fi
+    - {{ name }}2_print_kernels{{ elpa_suffix }}_openmp
+    - if [[ "${target_platform}" != "linux-aarch64" ]]; then {{ name }}2_print_kernels{{ elpa_suffix }}; fi
 
 about:
   home: https://elpa.mpcdf.mpg.de/
