@@ -116,7 +116,7 @@ about:
     For the calculation of a significant part of the eigensystem typically direct
     eigensolvers are used. For large problems, the eigensystem calculations with
     existing solvers can become the computational bottleneck.
-    The MVAPIch version comes with CUDA 12 support.
+    The MVAPIch version comes with CUDA 12 and Slingshot Host System (SHS)support.
 
 extra:
   recipe-maintainers:
