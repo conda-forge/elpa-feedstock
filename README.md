@@ -18,6 +18,7 @@ The computation of selected or all eigenvalues and eigenvectors of a symmetric
 For the calculation of a significant part of the eigensystem typically direct
 eigensolvers are used. For large problems, the eigensystem calculations with
 existing solvers can become the computational bottleneck.
+The MVAPIch version comes with CUDA 12 support.
 
 
 Current build status
@@ -45,6 +46,13 @@ Current build status
                 </a>
               </td>
             </tr><tr>
+              <td>linux_64_mpimvapich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_mpimvapich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>linux_64_mpinompi</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
@@ -63,6 +71,13 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_mpimpich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_aarch64_mpimvapich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=14274&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/elpa-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_mpimvapich" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -272,6 +287,7 @@ Feedstock Maintainers
 =====================
 
 * [@awvwgk](https://github.com/awvwgk/)
+* [@j34ni](https://github.com/j34ni/)
 * [@jan-janssen](https://github.com/jan-janssen/)
 * [@yuzie007](https://github.com/yuzie007/)
 

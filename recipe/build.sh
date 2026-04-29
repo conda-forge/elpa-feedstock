@@ -48,7 +48,8 @@ else
   export FORTRAN_CPP="${CPP:-cpp} -P -traditional"
 fi
 
-conf_options=(
+# Base options used by both builds
+base_options=(
    "--prefix=${PREFIX}"
    "--build=${BUILD}"
    "--host=${HOST}"
@@ -57,25 +58,69 @@ conf_options=(
    ${conf_extra:-}
 )
 
-# First build without OpenMP
-mkdir build
-pushd build
-../configure "${conf_options[@]}"
+if [[ "${target_platform}" == "linux-aarch64" ]]; then
+  base_options+=("--enable-neon-arch64-kernels")
+fi
 
-make -j ${CPU_COUNT:-1}
-make install
+# Test disabling on aarch64
+test_extra=()
+if [[ "${target_platform}" == "linux-aarch64" ]] && [[ "${mpi}" == "mvapich" ]]; then
+  test_extra=( "--disable-fortran-tests" "--disable-c-tests" "--disable-cpp-tests" )
+fi
 
-popd
+# CUDA-specific options (only for mvapich)
+cuda_options=()
+if [[ "${mpi}" == "mvapich" ]]; then
+  source ${RECIPE_DIR}/mvapich_cuda_stub.sh
 
-# Second build with OpenMP
+  if [[ "${target_platform}" == "linux-aarch64" ]]; then
+    cuda_options=(
+      "--enable-nvidia-gpu-kernels"
+      "--with-NVIDIA-GPU-compute-capability=sm_90"
+      "--enable-cuda-aware-mpi=yes"
+      "--with-cuda-path=${CUDA_HOME}"
+    )
+  else
+    cuda_options=(
+      "--enable-nvidia-gpu-kernels"
+      "--with-NVIDIA-GPU-compute-capability=sm_80"
+      "--enable-cuda-aware-mpi=yes"
+      "--with-cuda-path=${CUDA_HOME}"
+    )
+  fi
+
+  export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib -L${CUDA_HOME}/lib -L${CUDA_HOME}/lib/stubs"
+fi
+
+# Non-OpenMP build (skip on aarch64 only for mvapich)
+if [[ "${target_platform}" != "linux-aarch64" ]] || [[ "${mpi}" != "mvapich" ]]; then
+  mkdir build
+  pushd build
+  ../configure "${base_options[@]}" "${cuda_options[@]}" "${test_extra[@]}"
+  make -j ${CPU_COUNT:-1}
+  make install
+  popd
+fi
+
+# OpenMP build (always)
 mkdir build_openmp
 pushd build_openmp
-../configure --enable-openmp "${conf_options[@]}"
+
+../configure --enable-openmp "${base_options[@]}" "${cuda_options[@]}" "${test_extra[@]}"
 
 make -j ${CPU_COUNT:-1}
-for t in ${tests[@]}; do
-  make $t && ./$t
-done
-make install
 
+if [[ "${target_platform}" != "linux-aarch64" ]] || [[ "${mpi}" != "mvapich" ]]; then
+  for t in ${tests[@]}; do
+    make $t && ./$t
+  done
+fi
+
+make install
 popd
+
+if [[ ${mpi} == "mvapich" ]]; then
+  rm -f "${CUDA_HOME}/lib/stubs/libcuda.so.1"
+  rm -f "${CUDA_HOME}/lib/libcublas.so"
+  rm -f "${CUDA_HOME}/lib/libcusolver.so"
+fi

@@ -2,3 +2,16 @@ mpi:
   - nompi
   - mpich
   - openmpi
+  - mvapich
+
+mvapich:
+  - "4.1 shs_cuda_h*_1*"
+
+c_compiler_version:
+  - 13  # [linux]
+
+cxx_compiler_version:
+  - 13  # [linux]
+
+fortran_compiler_version:
+  - 13  # [linux]
