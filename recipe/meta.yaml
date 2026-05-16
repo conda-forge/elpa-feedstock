@@ -53,6 +53,7 @@ requirements:
     - {{ mpi }}  # [mpi != "nompi"]
     - make
     - perl
+    - pkg-config
   host:
     - {{ mpi }}  # [mpi != 'nompi']
     - libopenblas * *openmp*
