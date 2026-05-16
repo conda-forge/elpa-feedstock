@@ -58,11 +58,11 @@ requirements:
     - {{ mpi }}  # [mpi != 'nompi']
     - libblas
     - liblapack
-    - libopenblas * *openmp*
+    - "libopenblas * *openmp*"
     - scalapack  # [mpi != 'nompi']
   run:
     - {{ mpi }}  # [mpi != "nompi"]
-    - libopenblas * *openmp*
+    - "libopenblas * *openmp*"
     - scalapack  # [mpi != "nompi"]
 
 test:
