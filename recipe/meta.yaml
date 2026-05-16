@@ -56,6 +56,8 @@ requirements:
     - pkg-config
   host:
     - {{ mpi }}  # [mpi != 'nompi']
+    - libblas
+    - liblapack
     - libopenblas * *openmp*
     - scalapack  # [mpi != 'nompi']
   run:

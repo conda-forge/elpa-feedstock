@@ -2,6 +2,3 @@ mpi:
   - nompi
   - mpich
   - openmpi
-
-blas_impl:
-  - openblas
