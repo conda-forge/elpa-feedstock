@@ -51,6 +51,8 @@ requirements:
     - {{ compiler('fortran') }}
     - {{ stdlib("c") }}
     - {{ mpi }}  # [mpi != "nompi"]
+    - libblas
+    - liblapack
     - make
     - perl
     - pkg-config
