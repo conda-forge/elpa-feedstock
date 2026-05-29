@@ -15,6 +15,12 @@ tests=(
 # MPI setup
 if [[ "${mpi}" != "nompi" ]]; then
   MPI=yes
+  export OMPI_CC="${CC}"
+  export OMPI_CXX="${CXX}"
+  export OMPI_FC="${FC}"
+  export MPICH_CC="${CC}"
+  export MPICH_CXX="${CXX}"
+  export MPICH_FC="${FC}"
   export CC="${PREFIX}/bin/mpicc"
   export CXX="${PREFIX}/bin/mpicxx"
   export FC="${PREFIX}/bin/mpifort"
@@ -44,7 +50,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
   fi
   export FORTRAN_CPP="${FC:-gfortran} -E -P -cpp"
 else
-  if [[ "$(uname -m)" == "x86_64" ]]; then
+  if [[ "${target_platform}" == "linux-64" ]]; then
     export CFLAGS="${CFLAGS} -mavx2 -mfma"
     export FFLAGS="${FFLAGS} -mavx2 -mfma"
   else
@@ -56,7 +62,7 @@ fi
 # Ensure PREFIX paths are visible
 export CPPFLAGS="${CPPFLAGS} -I${PREFIX}/include"
 export FCFLAGS="${FCFLAGS} -I${PREFIX}/include"
-export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib"
+export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib -Wl,-rpath,${PREFIX}/lib"
 
 if [[ "${MPI}" == "yes" ]]; then
   export LIBS="${LIBS} -lscalapack"
@@ -79,7 +85,7 @@ fi
 mkdir build
 pushd build
 
-../configure "${conf_options[@]}"
+../configure "${conf_options[@]}" || { cat config.log; exit 1; }
 make -j"${CPU_COUNT:-1}"
 make install
 
