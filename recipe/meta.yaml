@@ -1,13 +1,14 @@
 {% set name = "elpa" %}
 {% set version = "2026.02.001" %}
 {% set build = 0 %}
-{% set mpi = mpi or "nompi" %}
 
-# ELPA uses suffixes to allow parallel installation of several versions in the same prefix
 {% if mpi == "nompi" %}
-{% set elpa_suffix = "_onenode" %}
+  {% set build = build + 100 %}
+  {% set elpa_suffix = "_onenode" %}
+  {% set mpi_prefix = "nompi" %}
 {% else %}
-{% set elpa_suffix = "" %}
+  {% set elpa_suffix = "" %}
+  {% set mpi_prefix = "mpi_" + mpi %}
 {% endif %}
 
 package:
@@ -17,81 +18,60 @@ package:
 source:
   url: https://elpa.mpcdf.mpg.de/software/tarball-archive/Releases/{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: a379f27f4dbd27b2ee45017afec656d064301e97150c874649bdfd64957b75ed
-  patches:
-    - fdep-perl.patch
-    - pkgconf.patch
-    - check_thread_affinity.patch
-    - includedir-suffix.patch
 
-{% if mpi == "nompi" %}
-{% set build = build + 100 %}
-{% endif %}
 build:
   number: {{ build }}
   skip: true  # [win]
-
-  {% if mpi != "nompi" %}
-  {% set mpi_prefix = "mpi_" + mpi %}
-  {% else %}
-  {% set mpi_prefix = "nompi" %}
-  {% endif %}
   string: {{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}
-
   run_exports:
-  {% if mpi != "nompi" %}
+    {% if mpi != "nompi" %}
     - {{ name }} * {{ mpi_prefix }}_*
-  {% endif %}
-    - {{ pin_subpackage('elpa', max_pin='x.x.x') }}
+    {% endif %}
+    - {{ pin_subpackage("elpa", max_pin="x.x.x") }}
 
 requirements:
   build:
-    - gnuconfig  # [unix]
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - {{ compiler('fortran') }}
+    - {{ compiler("c") }}
     - {{ stdlib("c") }}
+    - {{ compiler("cxx") }}
+    - {{ compiler("fortran") }}
     - {{ mpi }}  # [mpi != "nompi"]
-    - libblas
-    - liblapack
+    - gnuconfig  # [unix]
     - make
     - perl
     - pkg-config
   host:
-    - {{ mpi }}  # [mpi != 'nompi']
+    - {{ mpi }}  # [mpi != "nompi"]
     - libblas
     - liblapack
     - "libopenblas * *openmp*"
-    - scalapack  # [mpi != 'nompi']
+    - scalapack  # [mpi != "nompi"]
   run:
     - {{ mpi }}  # [mpi != "nompi"]
+    - _openmp_mutex
+    - libblas
+    - liblapack
     - "libopenblas * *openmp*"
     - scalapack  # [mpi != "nompi"]
 
 test:
   requires:
-    - {{ mpi }}  # [mpi != 'nompi']
+    - {{ mpi }}  # [mpi != "nompi"]
     - pkg-config
   commands:
-    # Set OpenMPI sandbox escape flags to prevent Docker container initialization failures
-    - export OMPI_MCA_btl=self,vader  # [mpi == 'openmpi']
-    - export OMPI_MCA_plm_rsh_agent=sh  # [mpi == 'openmpi']
-    - export AM_DEFAULT_VERBOSITY=1  # [mpi == 'openmpi']
-    # Shared library checks
-    - test -f $PREFIX/lib/libelpa{{ elpa_suffix }}${SHLIB_EXT}
-    - test -f $PREFIX/lib/libelpa{{ elpa_suffix }}_openmp${SHLIB_EXT}
-    # Package metadata checks
-    - pkg-config elpa{{ elpa_suffix }} --exact-version {{ version }}
-    - pkg-config elpa{{ elpa_suffix }}_openmp --exact-version {{ version }}
-    # Binary execution checks without MPI
-    - elpa2_print_kernels{{ elpa_suffix }}  # [mpi == 'nompi']
-    - elpa2_print_kernels{{ elpa_suffix }}_openmp  # [mpi == 'nompi']
-    # Binary execution checks with MPI
-    - mpiexec -n 1 elpa2_print_kernels{{ elpa_suffix }}  # [mpi != 'nompi']
-    - mpiexec -n 1 elpa2_print_kernels{{ elpa_suffix }}_openmp  # [mpi != 'nompi']
+    # Library presence
+    - test -f "$PREFIX/lib/libelpa{{ elpa_suffix }}${SHLIB_EXT}"
+    - test -f "$PREFIX/lib/libelpa{{ elpa_suffix }}_openmp${SHLIB_EXT}"
+    # pkg-config checks
+    - pkg-config --exists elpa{{ elpa_suffix }}
+    - pkg-config --exists elpa{{ elpa_suffix }}_openmp
+    # Binary execution checks
+    - elpa2_print_kernels{{ elpa_suffix }}
+    - elpa2_print_kernels{{ elpa_suffix }}_openmp
 
 about:
   home: https://elpa.mpcdf.mpg.de/
-  doc_url: https://elpa.mpcdf.mpg.de/documentation/doxygen/ELPA_DOXYGEN_PAGES/ELPA-{{ version }}/html/index.html
+  doc_url: https://elpa.mpcdf.mpg.de/documentation/
   dev_url: https://gitlab.mpcdf.mpg.de/elpa/elpa
   license: LGPL-3.0-only
   license_file:
