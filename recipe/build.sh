@@ -5,7 +5,8 @@ set -ex
 cp "${BUILD_PREFIX}/share/gnuconfig/config."* .
 
 # Fix hardcoded perl interpreter (and remove -w which breaks env)
-find . -name "*.pl" -exec sed -i '1s|^#!.*perl.*|#!/usr/bin/env perl|' {} +
+find . -name "*.pl" -exec sed -i.bak '1s|^#!.*perl.*|#!/usr/bin/env perl|' {} +
+find . -name "*.pl.bak" -delete
 
 # Minimal CI tests
 tests=(
