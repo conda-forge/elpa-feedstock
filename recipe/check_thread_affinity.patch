@@ -1,0 +1,28 @@
+diff --git a/src/helpers/check_thread_affinity.c b/src/helpers/check_thread_affinity.c
+index fd3b752..e1d8ed7 100644
+--- a/elpa-2021.05.002/src/helpers/check_thread_affinity.c
++++ b/elpa-2021.05.002/src/helpers/check_thread_affinity.c
+@@ -56,10 +56,15 @@
+ 
+ 
+ void get_thread_affinity(int *cpu_id) {
++#ifdef __linux__
+   *cpu_id = sched_getcpu();
++#else
++  *cpu_id = -1;
++#endif
+ }
+ 
+ void get_process_affinity(int cpu_id) {
++#ifdef __linux__
+   cpu_set_t set;
+   int ret, i;
+   int cpu;
+@@ -70,6 +75,7 @@ void get_process_affinity(int cpu_id) {
+       cpu = CPU_ISSET(i, &set);
+       if (cpu == 1) { cpu_id = i; }
+     }
++#endif
+ }
+ 
+ void get_process_id(int *process_id, int *pprocess_id) {

@@ -18,15 +18,16 @@ package:
 source:
   url: https://elpa.mpcdf.mpg.de/software/tarball-archive/Releases/{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: a379f27f4dbd27b2ee45017afec656d064301e97150c874649bdfd64957b75ed
+  patches:
+    - check_thread_affinity.patch
+    - includedir-suffix.patch
+    - pkgconf.patch
 
 build:
   number: {{ build }}
   skip: true  # [win]
   string: {{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}
   run_exports:
-    {% if mpi != "nompi" %}
-    - {{ name }} * {{ mpi_prefix }}_*
-    {% endif %}
     - {{ pin_subpackage("elpa", max_pin="x.x.x") }}
 
 requirements:
