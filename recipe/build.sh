@@ -29,9 +29,6 @@ if [[ "${mpi}" != "nompi" ]]; then
     export CC="${PREFIX}/bin/mpicc"
     export CXX="${PREFIX}/bin/mpicxx"
     export FC="${PREFIX}/bin/mpifort"
-    export OMPI_CC="${PREFIX}/bin/mpicc"
-    export OMPI_CXX="${PREFIX}/bin/mpicxx"
-    export OMPI_FC="${PREFIX}/bin/mpifort"
   fi
 else
   MPI=no
@@ -104,8 +101,7 @@ fi
 mkdir build
 pushd build
 
-../configure "${conf_options[@]}" \
-  CC="${CC}" CXX="${CXX}" FC="${FC}" || { cat config.log; exit 1; }
+../configure "${conf_options[@]}" || { cat config.log; exit 1; }
 
 make -j"${CPU_COUNT:-1}"
 make install
@@ -116,7 +112,7 @@ popd
 mkdir build_openmp
 pushd build_openmp
 
-../configure --enable-openmp "${conf_options[@]}"
+../configure --enable-openmp "${conf_options[@]}" || { cat config.log; exit 1; }
 
 make -j"${CPU_COUNT:-1}"
 
