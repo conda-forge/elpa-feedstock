@@ -4,7 +4,7 @@ set -ex
 # Update config.guess / config.sub
 cp "${BUILD_PREFIX}/share/gnuconfig/config."* .
 
-# Fix perl shebangs (portable)
+# Fix hardcoded perl interpreter (and remove -w which breaks env)
 find . -name "*.pl" -exec sed -i.bak '1s|^#!.*perl.*|#!/usr/bin/env perl|' {} +
 find . -name "*.pl.bak" -delete
 
@@ -13,51 +13,42 @@ tests=(
   "validate_real_2stage_banded_default.sh"
 )
 
-# MPI setup (CRITICAL: avoid wrappers during cross-compilation)
+# MPI setup
 if [[ "${mpi}" != "nompi" ]]; then
   MPI=yes
-
   export OMPI_CC="${CC}"
   export OMPI_CXX="${CXX}"
   export OMPI_FC="${FC}"
   export MPICH_CC="${CC}"
   export MPICH_CXX="${CXX}"
   export MPICH_FC="${FC}"
-
-  # Only use MPI wrappers for native builds
-  if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" != "1" ]]; then
-    export CC="${PREFIX}/bin/mpicc"
-    export CXX="${PREFIX}/bin/mpicxx"
-    export FC="${PREFIX}/bin/mpifort"
-  fi
+  export CC="${PREFIX}/bin/mpicc"
+  export CXX="${PREFIX}/bin/mpicxx"
+  export FC="${PREFIX}/bin/mpifort"
 else
   MPI=no
 fi
 
-# OpenMPI CI stabilization (runtime only)
+# OpenMPI CI stabilization
 if [[ "${mpi}" == "openmpi" ]]; then
   export OMPI_MCA_plm=isolated
   export OMPI_MCA_btl_vader_single_copy_mechanism=none
   export OMPI_MCA_rmaps_base_oversubscribe=yes
 fi
 
-# Compiler + architecture flags
+# Compiler and architecture flags
 conf_extra=""
-
 if [[ "$(uname)" == "Darwin" ]]; then
   if [[ "${target_platform}" == "osx-arm64" ]]; then
-    # LTO problematic in cross builds
     export CFLAGS="${CFLAGS} -fno-lto"
     export FCFLAGS="${FCFLAGS} -fno-lto"
     export CXXFLAGS="${CXXFLAGS} -fno-lto"
-
     conf_extra="--disable-sse-assembly --disable-avx2 --disable-avx --disable-sse"
   else
     export CFLAGS="${CFLAGS} -mavx"
     export FFLAGS="${FFLAGS} -mavx"
     conf_extra="--disable-sse-assembly --disable-avx2"
   fi
-
   export FORTRAN_CPP="${FC:-gfortran} -E -P -cpp"
 else
   if [[ "${target_platform}" == "linux-64" ]]; then
@@ -102,7 +93,7 @@ if [[ -n "${conf_extra}" ]]; then
   conf_options+=(${conf_extra})
 fi
 
-# Build (no OpenMP)
+# Build without OpenMP
 mkdir build
 pushd build
 
@@ -115,7 +106,7 @@ make install
 
 popd
 
-# Build (with OpenMP)
+# Build with OpenMP
 mkdir build_openmp
 pushd build_openmp
 
@@ -134,4 +125,3 @@ fi
 make install
 
 popd
-
