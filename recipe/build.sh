@@ -22,9 +22,15 @@ if [[ "${mpi}" != "nompi" ]]; then
   export MPICH_CC="${CC}"
   export MPICH_CXX="${CXX}"
   export MPICH_FC="${FC}"
-  export CC="${PREFIX}/bin/mpicc"
-  export CXX="${PREFIX}/bin/mpicxx"
-  export FC="${PREFIX}/bin/mpifort"
+  # Only override for native builds
+  if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" != "1" ]]; then
+    export CC="${PREFIX}/bin/mpicc"
+    export CXX="${PREFIX}/bin/mpicxx"
+    export FC="${PREFIX}/bin/mpifort"
+    export OMPI_CC="${CC}"
+    export OMPI_CXX="${CXX}"
+    export OMPI_FC="${FC}"
+  fi
 else
   MPI=no
 fi
