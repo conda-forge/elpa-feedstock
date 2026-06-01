@@ -16,20 +16,22 @@ tests=(
 # MPI setup
 if [[ "${mpi}" != "nompi" ]]; then
   MPI=yes
-  export OMPI_CC="${CC}"
-  export OMPI_CXX="${CXX}"
-  export OMPI_FC="${FC}"
-  export MPICH_CC="${CC}"
-  export MPICH_CXX="${CXX}"
-  export MPICH_FC="${FC}"
-  # Only override for native builds
-  if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" != "1" ]]; then
-    export CC="${PREFIX}/bin/mpicc"
-    export CXX="${PREFIX}/bin/mpicxx"
-    export FC="${PREFIX}/bin/mpifort"
+  if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == "1" ]]; then
+    # Cross-compilation: use real compilers
+    export MPICH_CC="${CC}"
+    export MPICH_CXX="${CXX}"
+    export MPICH_FC="${FC}"
     export OMPI_CC="${CC}"
     export OMPI_CXX="${CXX}"
     export OMPI_FC="${FC}"
+  else
+    # Native: use MPI wrappers
+    export CC="${PREFIX}/bin/mpicc"
+    export CXX="${PREFIX}/bin/mpicxx"
+    export FC="${PREFIX}/bin/mpifort"
+    export OMPI_CC="${PREFIX}/bin/mpicc"
+    export OMPI_CXX="${PREFIX}/bin/mpicxx"
+    export OMPI_FC="${PREFIX}/bin/mpifort"
   fi
 else
   MPI=no
@@ -52,14 +54,14 @@ if [[ "$(uname)" == "Darwin" ]]; then
     conf_extra="--disable-sse-assembly --disable-avx2 --disable-avx --disable-sse"
   else
     export CFLAGS="${CFLAGS} -mavx"
-    export FFLAGS="${FFLAGS} -mavx"
+    export FCLAGS="${FCLAGS} -mavx"
     conf_extra="--disable-sse-assembly --disable-avx2"
   fi
   export FORTRAN_CPP="${FC:-gfortran} -E -P -cpp"
 else
   if [[ "${target_platform}" == "linux-64" ]]; then
     export CFLAGS="${CFLAGS} -mavx2 -mfma"
-    export FFLAGS="${FFLAGS} -mavx2 -mfma"
+    export FCFLAGS="${FCLAGS} -mavx2 -mfma"
   else
     conf_extra="--disable-sse-assembly --disable-avx2 --disable-avx --disable-sse"
   fi
@@ -90,7 +92,6 @@ conf_options=(
   "--prefix=${PREFIX}"
   "--build=${BUILD}"
   "--host=${HOST}"
-  "--target=${HOST}"
   "--with-mpi=${MPI}"
   "--disable-avx512"
 )
@@ -104,8 +105,7 @@ mkdir build
 pushd build
 
 ../configure "${conf_options[@]}" \
-  CC="${CC}" CXX="${CXX}" FC="${FC}" \
-  || { cat config.log; exit 1; }
+  CC="${CC}" CXX="${CXX}" FC="${FC}" || { cat config.log; exit 1; }
 
 make -j"${CPU_COUNT:-1}"
 make install
@@ -116,8 +116,7 @@ popd
 mkdir build_openmp
 pushd build_openmp
 
-../configure --enable-openmp "${conf_options[@]}" \
-  CC="${CC}" CXX="${CXX}" FC="${FC}"
+../configure --enable-openmp "${conf_options[@]}"
 
 make -j"${CPU_COUNT:-1}"
 
