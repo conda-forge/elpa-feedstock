@@ -43,6 +43,7 @@ requirements:
     - pkg-config
   host:
     - {{ mpi }}  # [mpi != "nompi"]
+    - _openmp_mutex
     - libblas
     - liblapack
     - "libopenblas * *openmp*"
