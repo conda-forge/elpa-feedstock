@@ -32,6 +32,8 @@ requirements:
     - ${{ compiler("fortran") }}
     - if: unix
       then: gnuconfig
+    - if: build_platform != target_platform and mpi == "openmpi"
+      then: openmpi
     - make
     - perl
     - pkg-config
