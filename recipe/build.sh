@@ -16,9 +16,21 @@ tests=(
 # MPI setup
 if [[ "${mpi}" != "nompi" ]]; then
   MPI="yes"
-  export CC="${PREFIX}/bin/mpicc"
-  export CXX="${PREFIX}/bin/mpicxx"
-  export FC="${PREFIX}/bin/mpifort"
+  if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == "1" && "${mpi}" == "openmpi" ]]; then
+    # OpenMPI wrappers are binaries: use the build platform ones,
+    # pointed at the target headers/libraries and cross compilers
+    export OPAL_PREFIX="${PREFIX}"
+    export OMPI_CC="${CC}"
+    export OMPI_CXX="${CXX}"
+    export OMPI_FC="${FC}"
+    export CC="${BUILD_PREFIX}/bin/mpicc"
+    export CXX="${BUILD_PREFIX}/bin/mpicxx"
+    export FC="${BUILD_PREFIX}/bin/mpifort"
+  else
+    export CC="${PREFIX}/bin/mpicc"
+    export CXX="${PREFIX}/bin/mpicxx"
+    export FC="${PREFIX}/bin/mpifort"
+  fi
 else
   MPI="no"
 fi

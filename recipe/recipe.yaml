@@ -19,9 +19,8 @@ source:
     - pkgconf.patch
 
 build:
-  number: ${{ 1 + (100 if mpi == "nompi" else 0) }}
+  number: ${{ 2 + (100 if mpi == "nompi" else 0) }}
   skip:
-    - osx and arm64 and mpi == "openmpi"
     - win
   string: mpi_${{ mpi }}_h${{ hash }}_${{ build_number }}
 
@@ -33,6 +32,8 @@ requirements:
     - ${{ compiler("fortran") }}
     - if: unix
       then: gnuconfig
+    - if: build_platform != target_platform and mpi == "openmpi"
+      then: openmpi
     - make
     - perl
     - pkg-config
